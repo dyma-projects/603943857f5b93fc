@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../shared/services/user.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
@@ -6,14 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  public users: string[];
+  public users$: BehaviorSubject<Array<string>>;
 
   constructor(
-    // il faut probablement injecter un service ici !
+    private _userService: UserService
   ) { }
 
   ngOnInit() {
-    // il faut initialiser les users ici avec le service
+    this.users$ = this._userService.users$;
   }
+
 
 }
